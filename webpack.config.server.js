@@ -25,6 +25,15 @@ const config = {
                 use: 'file-loader'
             }
         ]
+    },
+    devServer: {
+        host: '0.0.0.0',
+        hot: true,
+        client: {
+            webSocketURL: {
+            port: 443
+            }
+        }
     }
 }
 
