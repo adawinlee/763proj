@@ -9,6 +9,7 @@ import Template from './../template'
 import userRoutes from './routes/user.routes'
 import authRoutes from './routes/auth.routes'
 import postRoutes from './routes/post.routes'
+import rateLimit from 'express-rate-limit'
 
 // modules for server side rendering
 import React from 'react'
@@ -35,9 +36,39 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(compress())
 // secure apps by setting various HTTP headers
-app.use(helmet())
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      imgSrc: ["'self'", "data:"],
+      connectSrc: ["'self'"],
+      frameSrc: ["'none'"], // Prevent clickjacking
+      formAction: ["'self'"],
+      baseUri: ["'self'"],
+      objectSrc: ["'none'"], // No Flash/plugins
+      reportUri: '/api/csp-violation'
+    },
+    reportOnly: false
+  })
+);
 // enable CORS - Cross Origin Resource Sharing
-app.use(cors())
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true
+}))
+// rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  limit: 100, // limit each IP to 100 requests per 15 min
+  standardHeaders: 'draft-8', // draft-8: combined RateLimit header
+  legacyHeaders: false, // disable X-RateLimit-* headers
+  ipv6Subnet: 56, // less aggressive: 60-64, more aggressive: 48-52
+  message: "Too many requests from this IP"
+});
+app.use(limiter)
 
 app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
 
