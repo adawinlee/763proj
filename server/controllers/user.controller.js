@@ -88,8 +88,8 @@ const update = (req, res) => {
 
 const remove = async (req, res) => {
   try {
-    let user = req.profile
-    let deletedUser = await user.remove()
+    let user = req.profile._id
+    let deletedUser = await User.deleteOne(user)
     deletedUser.hashed_password = undefined
     deletedUser.salt = undefined
     res.json(deletedUser)
