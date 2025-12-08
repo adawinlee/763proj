@@ -26,6 +26,7 @@ import theme from './../client/theme'
 
 const CURRENT_WORKING_DIR = process.cwd()
 const app = express()
+app.disable("x-powered-by");
 
 //comment out before building for production
 //devBundle.compile(app)
@@ -46,6 +47,7 @@ app.use(
       imgSrc: ["'self'", "data:"],
       connectSrc: ["'self'"],
       frameSrc: ["'none'"], // Prevent clickjacking
+      frameAncestors: ["'self'"],
       formAction: ["'self'"],
       baseUri: ["'self'"],
       objectSrc: ["'none'"], // No Flash/plugins
