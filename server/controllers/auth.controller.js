@@ -48,6 +48,7 @@ const signin = async (req, res) => {
 
 const signout = (req, res) => {
   res.clearCookie("t")
+  res.setHeader('Clear-Site-Data', '"cookies", "storage", "cache"');
   return res.status(200).json({
     message: "signed out"
   })
