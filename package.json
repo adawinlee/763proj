@@ -46,8 +46,11 @@
     "@hot-loader/react-dom": "16.13.0",
     "@material-ui/core": "4.12.4",
     "@material-ui/icons": "4.9.1",
+<<<<<<< HEAD
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",
+=======
+>>>>>>> 253fb2d3fc7ef73b47e0abaf22d253811816c74b
     "body-parser": "1.20.3",
     "compression": "^1.8.1",
     "cookie-parser": "^1.4.7",
@@ -61,7 +64,11 @@
     "mongoose": "^8.19.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+<<<<<<< HEAD
     "react-router": "5.3.4",
+=======
+    "react-router": "5.1.2",
+>>>>>>> 253fb2d3fc7ef73b47e0abaf22d253811816c74b
     "react-router-dom": "5.3.4"
   }
 }
