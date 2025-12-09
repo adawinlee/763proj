@@ -37,11 +37,12 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(compress())
 // secure apps by setting various HTTP headers
+app.use(helmet());
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+      scriptSrc: ["'self'"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       imgSrc: ["'self'", "data:"],
@@ -51,7 +52,7 @@ app.use(
       formAction: ["'self'"],
       baseUri: ["'self'"],
       objectSrc: ["'none'"], // No Flash/plugins
-      reportUri: '/api/csp-violation'
+      reportTo: '/api/csp-violation'
     },
     reportOnly: false
   })
