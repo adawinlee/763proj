@@ -78,9 +78,9 @@ const listNewsFeed = async (req, res) => {
 }
 
 const remove = async (req, res) => {
-  let post = req.post
+  let query = req.post._id
   try{
-    let deletedPost = await post.remove()
+    let deletedPost = await Post.deleteOne(query)
     res.json(deletedPost)
   }catch(err){
     return res.status(400).json({

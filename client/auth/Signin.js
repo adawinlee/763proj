@@ -46,6 +46,13 @@ export default function Signin(props) {
       redirectToReferrer: false
   })
 
+  const checkKeyPress = (e) => {
+    const { keyCode } = e;
+    if (keyCode === 13) {
+      clickSubmit();
+    }
+  };
+
   const clickSubmit = () => {
     const user = {
       email: values.email || undefined,
@@ -84,7 +91,7 @@ export default function Signin(props) {
             Sign In
           </Typography>
           <TextField id="email" type="email" label="Email" className={classes.textField} value={values.email} onChange={handleChange('email')} margin="normal"/><br/>
-          <TextField id="password" type="password" label="Password" className={classes.textField} value={values.password} onChange={handleChange('password')} margin="normal"/>
+          <TextField id="password" type="password" label="Password" className={classes.textField} value={values.password} onChange={handleChange('password')} onKeyDown={checkKeyPress} margin="normal"/>
           <br/> {
             values.error && (<Typography component="p" color="error">
               <Icon color="error" className={classes.error}>error</Icon>
