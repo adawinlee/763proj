@@ -56,7 +56,7 @@
     "formidable": "1.2.2",
     "helmet": "3.23.3",
     "jsonwebtoken": "^9.0.3",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "mongoose": "^8.20.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
